@@ -14,12 +14,8 @@ const createModelMock = (name, data, joinedTableName, sourceData) => {
           ...data[objIndex],
           ...changes
         }
-<<<<<<< HEAD
-        return Promise.resolve([1, [data[objIndex]]])
-=======
-        const ThisModel = dbMock.model(name);
+        const ThisModel = dbMock.model(name)
         return ThisModel.build(data[objIndex])
->>>>>>> e2665da (chore: format code)
       },
       destroy: function () {
         if (joinedTableName) {
