@@ -1,17 +1,39 @@
-<div class="container col-md-12 d-flex bg-light">
-  <div class="col-md-4">
-    <img src="{{user.image}}" alt="User image" class="img-fluid border">
-  </div>
-  <div class="col-md-8 m-3">
-    <h1>{{user.name}}</h1>
+<div class="card m-3">
+  <div class="row no-gutters">
     <div class="col-md-4">
-      <div class="well">
-        <ul class="list-unstyled">
-        <li><strong>Email:</strong> {{user.email}}</li>
-        <li><a class="btn btn-outline-primary" href="/users/{{user.id}}/edit">edit</a></li>
-        </ul>
+      <div class="card-body">
+        <img src="{{user.image}}" alt="User image" class="img-fluid border">
+      </div>
+    </div>
+    <div class="col-md-8">
+      <div class="card-body">
+        <h1>{{user.name}}</h1>
+        <div class="well">
+          <ul class="list-unstyled">
+            <li><strong>Email:</strong> {{user.email}}</li>
+            <li>{{commentCount}} 已評論餐廳</li>
+            <br>
+            <br>
+            <li><a class="btn btn-outline-primary" href="/users/{{user.id}}/edit">edit</a></li>
+          </ul>
+        </div>
       </div>
     </div>
   </div>
 </div>
-<a class="btn btn-outline-secondary" href="javascript:history.back()">Back</a>
+
+<div class="card m-3">
+  <div class="card-header">
+    {{commentCount}} 已評論餐廳
+  </div>
+  <div class="card-body m-1">
+    {{#each comments}}
+
+    <a href="/restaurants/{{this.Restaurant.id}}" class="m-2 text-decoration-none"> 
+      <img src={{this.Restaurant.image}} alt="Restaurant Profile" class="img-fluid mt-2" style="width: 80px; height:auto;">
+    </a>
+    {{/each}}
+  </div>
+</div>
+
+<a class="btn btn-outline-secondary m-3" href="javascript:history.back()">Back</a>

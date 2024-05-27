@@ -1,7 +1,6 @@
 const bcrypt = require('bcryptjs')
-const db = require('../models')
 const { localFileHandler } = require('../helpers/file-helpers')
-const { User } = db
+const { User, Comment, Restaurant } = require('../models')
 
 const userController = {
   signUpPage: (req, res) => {
@@ -39,9 +38,19 @@ const userController = {
     res.redirect('/signin')
   },
   getUser: (req, res) => {
-    return User.findByPk(req.params.id, { raw: true })
-      .then(user => {
-        res.render('users/profile', { user })
+    return Promise.all([
+      User.findByPk(req.params.id, { raw: true }),
+      Comment.count({ where: { userId: req.params.id } }),
+      Comment.findAll({
+        where: { userId: req.params.id },
+        include: Restaurant,
+        nest: true,
+        raw: true
+      })
+    ])
+      .then(([user, commentCount, comments]) => {
+        console.log(comments)
+        res.render('users/profile', { user, commentCount, comments })
       })
   },
   editUser: (req, res) => {
