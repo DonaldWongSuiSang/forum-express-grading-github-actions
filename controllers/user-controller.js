@@ -100,8 +100,8 @@ const userController = {
       .then(() => res.redirect('back'))
       .catch(err => next(err))
   },
-  deleteFavorite: (req, res, next) => {
-    Favorite.findOne({
+  removeFavorite: (req, res, next) => {
+    return Favorite.findOne({
       where: {
         userId: req.user.id,
         restaurantId: req.params.restaurantId
@@ -169,7 +169,7 @@ const userController = {
   },
   addFollowing: (req, res, next) => {
     const { userId } = req.params
-    Promise.all([
+    return Promise.all([
       User.findByPk(userId),
       Followship.findOne({
         where: {
@@ -190,7 +190,7 @@ const userController = {
       .catch(err => next(err))
   },
   removeFollowing: (req, res, next) => {
-    Followship.findOne({
+    return Followship.findOne({
       where: {
         followerId: req.user.id,
         followingId: req.params.userId

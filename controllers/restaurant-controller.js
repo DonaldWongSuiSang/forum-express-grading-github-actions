@@ -52,7 +52,7 @@ const restaurantController = {
       .then(restaurant => {
         const isFavorited = restaurant.FavoritedUsers.some(f => f.id === req.user.id)
         const isLiked = restaurant.LikedUsers.some(l => l.id === req.user.id)
-        res.render('restaurant', { restaurant: restaurant.toJSON(), isFavorited, isLiked})
+        res.render('restaurant', { restaurant: restaurant.toJSON(), isFavorited, isLiked })
       })
       .catch(err => next(err))
   },
@@ -89,9 +89,26 @@ const restaurantController = {
       })
     ])
       .then(([restaurants, comments]) => {
-        res.render('feeds', {
+        return res.render('feeds', {
           restaurants, comments
         })
+      })
+      .catch(err => next(err))
+  },
+  getTopRestaurants: (req, res, next) => {
+    return Restaurant.findAll({
+      include: [{ model: User, as: 'FavoritedUsers' }]
+    })
+      .then(restaurants => {
+        const result = restaurants
+          .map(restaurant => ({
+            ...restaurant.toJSON(),
+            favoritedCount: restaurant.FavoritedUsers.length,
+            isFavorited: req.user && restaurant.FavoritedUsers.some(f => f.id === req.user.id)
+          }))
+          .sort((a, b) => b.favoritedCount - a.favoritedCount)
+          .slice(0, 10)
+        return res.render('top-restaurants', { restaurants: result })
       })
       .catch(err => next(err))
   }
