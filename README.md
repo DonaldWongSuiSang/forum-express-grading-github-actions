@@ -1,52 +1,69 @@
-# README
+My Restaurant List
+This is a backend programming assignment version 2 from the Alpha Camp bootcamp: a restaurant list website built using Node.js + Express with API and MVC structure, which includes various restaurant information for users and admin to browse, view details, edit, and search. 
 
-1. Fork
-2. git clone
+Features:
+Users can browse all restaurants and view basic information such as name, category, image, and rating.
+Users can click on any restaurant to view detailed information including name, category, address, phone number, description, and images.
+Users can create new restaurant for providing detailed information including name, category, address, phone number, description, and images.
+Users can edit the restaurant detailed information including name, category, address, phone number, description, and images.
+Users can delete the restaurant
+Users can search for restaurants by Chinese name, English name, or category, with case-insensitive and space-insensitive matching.
+Users can sorting the restaurant by the name, category or location
+User have to login for the restaurant list, there are sample account below or register a new account or login via Facebook
+Prerequisites
+Node.js v20.11.1
 
-## 初始化
-### Initialize
-```
-git remote add upstream https://github.com/ALPHACamp/forum-express-grading.git  # 建立上游連線
+Installing
+Open your terminal and clone the project to your local machine:
+
+git clone https://github.com/DonaldWongSuiSang/forum-express-grading-github-actions.git
+Navigate to the project folder:
+
+cd restaurant-list
+Install npm packages:
+
 npm install
-```
+Install nodemon:
 
-### 設定資料庫
-需要與 config/config.json 一致
+npm install -g nodemon
+Initialize the database
 
-```
-create database forum;
-```
+npm run seed
+Create a ".env" file according to the ".env example"
 
-### 執行測試
-```
-npm run test
-```
+Start the server by running the app.js file:
 
-## 下載作業規格
-以 R01 為例
+npm run dev
+When you see the following message in the terminal, it indicates that the server and database have started successfully:
 
-```
-git checkout -b R01           # 開新分支
-git merge origin/R01-test     # 下載作業規格
-npm run test                  # 直到綠燈全亮
+express server is running on http://localhost:3000
+Open any web browser and go to http://localhost:3000 to start browsing the restaurant list.
 
-git add .
-git commit -m "...."
-```
+There are two account for the demo, the information as following:
 
-## 繳交作業
+1st User
+email: user1@example.com
+password: 12345678
 
-```
-git push origin R01           # 上傳本地進度
-```
+2nd User
+email: user2@example.com
+password: 12345678
 
-接著改成到 GitHub 來發 PR。
-
-## 共用帳號
-請一律設定下面 2 組帳號以利驗收：
-* 第一組帳號有 admin 權限：
-  * email: root@example.com
-  * password: 12345678
-* 第二組帳號沒有 admin 權限：
-  * email: user1@example.com
-  * password: 12345678
+Built With
+Node.js - JavaScript runtime
+Express - Web application framework for Node.js
+Express-handlebars - Template engine
+MySQL - Relational database management system
+Sequelize - Promise-based Node.js ORM for MySQL
+Method-override - Middleware for HTTP method override in Express.js
+Connect-flash - Middleware for displaying flash messages
+Dotenv - Module for loading environment variables
+Passport - Authentication middleware for Node.js
+Passport-local - Passport strategy for authenticating with a username and password
+Passport-facebook - Passport strategy for authenticating with Facebook using the OAuth 2.0 API
+Bcryptjs - Library for hashing passwords
+Font Awesome - Icon toolkit
+Authors
+Donald Wong
+Acknowledgments
+ALPHA Camp
